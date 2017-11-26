@@ -1,0 +1,45 @@
+name: ibm-containers-kubeconfig
+version: 0.1.0
+description: Fetch the kubeconfig for a cluster in the IBM Container service
+keywords:
+  - ibm
+  - containers
+  - kubernetes
+  - kubeconfig
+properties:
+  ic-cluster-name:
+    type: string
+    required: true
+  bx-username:
+    type: string
+    required: true
+  bx-password:
+    type: string
+    required: false
+    default: "${BLUEMIX_PASSWORD}"
+  bx-org-name:
+    type: string
+    required: false
+  bx-space-name:
+    type: string
+    required: false
+  bx-api-key:
+    type: string
+    required: false
+    default: "${BLUEMIX_API_KEY}"
+  bx-url:
+    type: string
+    required: false
+    default: https://api.ng.bluemix.net
+  ic-admin-kubeconfig:
+    type: string
+    required: false
+    default: "false"
+  ic-cli-version:
+    type: string
+    required: false
+    default: latest
+  bx-cli-version:
+    type: string
+    required: false
+    default: latest
