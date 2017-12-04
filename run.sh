@@ -54,4 +54,5 @@ mkdir -p ~/.kube/
 DATACENTER=$(bx cs cluster-get ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} | grep "^Datacenter:" | awk '{ print $2 }')
 SRC_KUBECONFIG=$(readlink -f ~/.bluemix/plugins/container-service/clusters/${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}/kube-config-${DATACENTER}-${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}.yml)
 DEST_KUBECONFIG=$(readlink -f ~/.kube/admin-kubeconfig)
+echo "copying $SRC_KUBECONFIG to $DEST_KUBECONFIG..."
 cp $SRC_KUBECONFIG $DEST_KUBECONFIG

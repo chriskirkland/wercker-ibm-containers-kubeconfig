@@ -1,5 +1,5 @@
 name: ibm-containers-kubeconfig
-version: 0.1.6
+version: 0.1.7
 description: Fetch the kubeconfig for a cluster in the IBM Container service
 keywords:
   - ibm
