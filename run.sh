@@ -50,5 +50,8 @@ bx plugin install container-service -r Bluemix ${IC_CLI_VERSION_FLAG}
 bx cs cluster-config ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} ${IC_ADMIN_FLAG}
 
 # export kubeconfig
+mkdir -p ~/.kube/
 DATACENTER=$(bx cs cluster-get ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} | grep "^Datacenter:" | awk '{ print $2 }')
-export KUBECONFIG=$(readlink -f ~/.bluemix/plugins/container-service/clusters/${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}/kube-config-${DATACENTER}-${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}.yml)
+SRC_KUBECONFIG=$(readlink -f ~/.bluemix/plugins/container-service/clusters/${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}/kube-config-${DATACENTER}-${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}.yml)
+DEST_KUBECONFIG=$(readlink -f ~/.kube/admin-kubeconfig)
+cp $SRC_KUBECONFIG $DEST_KUBECONFIG
