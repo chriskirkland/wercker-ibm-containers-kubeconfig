@@ -9,10 +9,6 @@ if [ -z "${WERCKER_IBM_CONTAINERS_KUBECONFIG_BX_CLI_VERSION}" ]; then
   fail "ic-cli-version cannot be empty. valid options are \"latest\" or semver (i.e. 0.3.2). See https://console.bluemix.net/docs/cli/reference/bluemix_cli/all_versions.html for available options."
 fi
 
-if [ -z "${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLI_VERSION}" ]; then
-  fail "ic-cli-version cannot be empty. valid options are \"latest\" or semver (i.e. 0.3.2)"
-fi
-
 if [ -z "${WERCKER_IBM_CONTAINERS_KUBECONFIG_BX_USERNAME}" ]; then
   fail "bx-username is required and must not be empty"
 fi
