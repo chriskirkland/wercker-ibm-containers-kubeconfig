@@ -48,7 +48,7 @@ cd Bluemix_CLI
 bx login -a ${WERCKER_IBM_CONTAINERS_KUBECONFIG_BX_URL} ${BX_TARGET} ${BX_LOGIN_CREDENTIALS}
 
 # install ibm containers cli
-bx plugin install containers-service -r Bluemix ${IC_CLI_VERSION_FLAG}
+bx plugin install container-service -r Bluemix ${IC_CLI_VERSION_FLAG}
 
 # get kubeconfig
 bx cs cluster-config ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} ${IC_ADMIN_FLAG}
