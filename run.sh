@@ -32,6 +32,7 @@ fi
 
 if [ -n "${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_ADMIN_KUBECONFIG}" ]; then
   IC_ADMIN_FLAG="--admin"
+  IC_ADMIN_SUFFIX="-admin"
 fi
 
 # install bluemix cli
@@ -47,12 +48,10 @@ bx login -a ${WERCKER_IBM_CONTAINERS_KUBECONFIG_BX_URL} ${BX_TARGET} ${BX_LOGIN_
 bx plugin install container-service -r Bluemix ${IC_CLI_VERSION_FLAG}
 
 # get kubeconfig
-bx cs cluster-config ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} ${IC_ADMIN_FLAG}
+KUBECONFIG=$(bx cs cluster-config ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} ${IC_ADMIN_FLAG} --export)
 
 # export kubeconfig
 mkdir -p ~/.kube/
-DATACENTER=$(bx cs cluster-get ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} | grep "^Datacenter:" | awk '{ print $2 }')
-SRC_KUBECONFIG=$(readlink -f ~/.bluemix/plugins/container-service/clusters/${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}/kube-config-${DATACENTER}-${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}.yml)
 DEST_KUBECONFIG=$(readlink -f ~/.kube/admin-kubeconfig)
-echo "copying \"$SRC_KUBECONFIG\" to \"$DEST_KUBECONFIG\"..."
-cp $SRC_KUBECONFIG $DEST_KUBECONFIG
+echo "copying \"$KUBECONFIG\" to \"$DEST_KUBECONFIG\"..."
+cp $KUBECONFIG $DEST_KUBECONFIG
