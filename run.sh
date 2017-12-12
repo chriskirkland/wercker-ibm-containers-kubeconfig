@@ -48,10 +48,10 @@ bx login -a ${WERCKER_IBM_CONTAINERS_KUBECONFIG_BX_URL} ${BX_TARGET} ${BX_LOGIN_
 bx plugin install container-service -r Bluemix ${IC_CLI_VERSION_FLAG}
 
 # get kubeconfig
-KUBECONFIG=$(bx cs cluster-config ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} ${IC_ADMIN_FLAG} --export)
+KUBECONFIG=$(bx cs cluster-config ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME} ${IC_ADMIN_FLAG} --export | cut -d'=' -f2)
 
 # export kubeconfig
 mkdir -p ~/.kube/
-DEST_KUBECONFIG=$(readlink -f ~/.kube/admin-kubeconfig | cut -d'=' -f2)
+DEST_KUBECONFIG=$(readlink -f ~/.kube/admin-kubeconfig)
 echo "copying \"$KUBECONFIG\" to \"$DEST_KUBECONFIG\"..."
 cp $KUBECONFIG $DEST_KUBECONFIG
