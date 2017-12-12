@@ -55,5 +55,6 @@ KUBECONFIG=$(bx cs cluster-config ${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER
 # export kubeconfig
 mkdir -p ~/.kube/
 DEST_KUBECONFIG=$(readlink -f ~/.kube/admin-kubeconfig)
-echo "copying \"$KUBECONFIG\" to \"$DEST_KUBECONFIG\"..."
-cp $KUBECONFIG $DEST_KUBECONFIG
+echo "copying \"${KUBECONFIG}\" to \"${DEST_KUBECONFIG}\"..."
+mv ${KUBECONFIG} ${DEST_KUBECONFIG}
+cp $(dirname ${KUBECONFIG})/* ~/.kube/
