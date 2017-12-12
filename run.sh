@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # environment variables
 if [ -z "${WERCKER_IBM_CONTAINERS_KUBECONFIG_IC_CLUSTER_NAME}" ]; then
   fail "ic-cluster-name cannot be empty. run \`bx cs clusters\` to find a valid cluster name."
